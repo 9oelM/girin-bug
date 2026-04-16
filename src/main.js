@@ -13,8 +13,8 @@ if (!PROJECT_ID || PROJECT_ID === 'your_project_id_here') {
 }
 
 // XRPL CAIP-2 chain IDs
-// xrpl:1 = mainnet / xrpl:0 = testnet
-const XRPL_CHAIN = 'xrpl:0'
+// xrpl:1 = testnet / xrpl:0 = mainnet
+const XRPL_CHAIN = 'xrpl:1'
 
 // ---------------------------------------------------------------------------
 // State
@@ -76,6 +76,13 @@ function log(msg) {
   $('status').textContent = msg
 }
 
+// type: 'success' | 'failure' | null
+function setBanner(type, msg = '') {
+  const el = $('result-banner')
+  el.className = type ?? ''
+  el.textContent = msg
+}
+
 function render() {
   const account = getAccount()
   const connected = !!session && !!account
@@ -132,6 +139,8 @@ async function disconnect() {
   }
   session = null
   log('Disconnected')
+  setBanner(null)
+  $('result').textContent = ''
   render()
 }
 
@@ -164,6 +173,7 @@ async function sendMptAuthorize() {
   }
 
   log('Awaiting wallet approval…')
+  setBanner(null)
   $('result').textContent = `Sending tx:\n${JSON.stringify(tx, null, 2)}`
 
   console.group('MPTokenAuthorize request')
@@ -184,15 +194,13 @@ async function sendMptAuthorize() {
       },
     })
 
-    log('Transaction signed!')
+    log('')
+    setBanner('success', 'MPTokenAuthorize signed successfully')
     $('result').textContent = JSON.stringify(result, null, 2)
   } catch (err) {
-    log(`Error: ${err.message}`)
-    $('result').textContent = [
-      `Error: ${err.message}`,
-      '',
-      JSON.stringify(err, null, 2),
-    ].join('\n')
+    log('')
+    setBanner('failure', `MPTokenAuthorize failed: ${err.message}`)
+    $('result').textContent = JSON.stringify(err, null, 2)
     console.error(err)
   }
 }

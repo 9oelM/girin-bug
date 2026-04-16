@@ -36,11 +36,21 @@
     #account-info { margin: 0.6rem 0; color: #006600; font-size: 0.9rem; min-height: 1.2em; }
     #status { margin: 0.4rem 0; font-weight: bold; font-size: 0.9rem; min-height: 1.2em; }
     hr { margin: 1.25rem 0; border: none; border-top: 1px solid #ddd; }
+    #result-banner {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+    #result-banner.success { display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    #result-banner.failure { display: block; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     pre#result {
       background: #f5f5f5;
       border: 1px solid #ddd;
       padding: 0.75rem;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       overflow-x: auto;
       font-size: 0.8rem;
       white-space: pre-wrap;
@@ -86,6 +96,7 @@
 
   <button id="btn-send" disabled>Send MPTokenAuthorize</button>
 
+  <div id="result-banner"></div>
   <pre id="result"></pre>
 
   <script type="module" src="/src/main.js"></script>
