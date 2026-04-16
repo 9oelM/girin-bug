@@ -2,18 +2,9 @@
 
 Minimal website to reproduce the Girin Wallet crash when sending an `MPTokenAuthorize` transaction via WalletConnect on XRPL.
 
-## Setup
+**Live page:** https://be8c2b80.xrpl-mptauthorize-repro.pages.dev/
 
-```bash
-cp .env.example .env
-# Edit .env and set VITE_WC_PROJECT_ID
-# Get a free Project ID at https://cloud.walletconnect.com
-
-npm install
-npm run dev
-```
-
-Open http://localhost:5173, scan the QR code with Girin Wallet, then click **Send MPTokenAuthorize**.
+Open the page, scan the QR code with Girin Wallet, then click **Send MPTokenAuthorize**.
 
 ## What it does
 
@@ -28,6 +19,15 @@ Open http://localhost:5173, scan the QR code with Girin Wallet, then click **Sen
    }
    ```
 3. The wallet crashes on receiving this request (the bug being reproduced)
+
+## Tested environment
+
+| Field | Value |
+|-------|-------|
+| Girin Wallet version | v2.2.0 (build 174) |
+| iOS version | 26.3.1 (a) |
+| Device | iPhone 15 |
+| XRPL network | Testnet |
 
 ## Suspected causes
 
