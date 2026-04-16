@@ -104,7 +104,7 @@ async function connect() {
         xrpl: {
           chains: [XRPL_CHAIN],
           methods: ['xrpl_signTransaction'],
-          events: ['accountsChanged'],
+          events: ['chainChanged', 'accountsChanged'],
         },
       },
     })
